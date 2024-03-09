@@ -1,0 +1,11 @@
+.col{
+  height:345px;
+  background-color: black;
+  width:100px;
+  margin-left:2px;
+}
+
+#col3{
+  width:10%;
+  background-color: blue;
+}
