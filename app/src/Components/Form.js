@@ -1,26 +1,45 @@
-import react from "react";
-import "../Style/Form.css";
+import React, { useState } from 'react';
 
-function Form(){
-  return(
-    <div class = "container">
-        <div class = "container-sm">
-      <div class="mb-3 row">
-        <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-        <div class="col-sm-10">
-        <input type="text" readonly class="form-control" id="staticEmail" ></input>
-      </div>
-    </div>
-    <div class="mb-3 row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-      <div class="col-sm-10">
-        <input type="password" class="form-control" id="inputPassword"></input>
-       </div>
-      </div>
-    </div>
-    </div>
-    
-  )
+function Formulario() {
+  const [dato, setDato] = useState('');
+
+  const handleChange = (event) => {
+    setDato(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch('http://localhost:3000/datos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ dato })
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al enviar los datos');
+      }
+
+      console.log('Datos enviados correctamente');
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={dato}
+        onChange={handleChange}
+        placeholder="Ingrese un dato"
+      />
+      <button type="submit">Enviar</button>
+    </form>
+  );
 }
 
-export default Form;
+export default Formulario;

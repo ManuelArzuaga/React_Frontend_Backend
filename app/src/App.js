@@ -12,7 +12,7 @@ function App() {
      <Navbar></Navbar>
      <Header></Header>
      <Form></Form>
-     <Footer></Footer>
+     {/* <Footer></Footer> */}
      
     </div>
   );
